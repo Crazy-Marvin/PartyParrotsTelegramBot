@@ -9,4 +9,33 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/7ae5f852725f409087975f2412adbe0b)](https://www.codacy.com/gh/Crazy-Marvin/PartyParrotsTelegramBot?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Crazy-Marvin/PartyParrotsTelegramBotamp;utm_campaign=Badge_Grade)
 ![No Dependencies](https://img.shields.io/badge/Dependencies-None-brightgreenChat)
 
-# PartyParrotTelegramBot
+# Party Parrots Telegram Bot
+
+Now you can easily access the party parrots in Telegram! 🦜
+
+This bot supports so called inline messages which means that you can message @PartyParrotsBot in any chat, group or channel and look for your [desired parrot](https://cultofthepartyparrot.com/). 
+Check out the .gif to see it in action. 
+
+__TO DO: put .gif here__
+
+Huge thank yous go to [Sirocco](https://www.youtube.com/watch?v=9T1vfsHYiKY), the [Cult of the Party Parrot](https://github.com/jmhobbs/cultofthepartyparrot.com) and [Dany](https://github.com/dsluijk/PartyParrotBot).
+
+### Requirements
+
+- Token from [@Botfather](https://telegram.me/botfather) (don't forget to enable the inline mode)
+- SSL certificate (I recommend [Let's Encrypt](https://letsencrypt.org/))
+- Webserver running [PHP](https://www.php.net/) (tested with [Apache](https://httpd.apache.org/), [NGINX](https://www.nginx.com/) and [Caddy](https://caddyserver.com/) but others should work too)
+- [Parrot source](https://cultofthepartyparrot.com/parrots.json)
+- [Healthchecks](https://healthchecks.io/#php) URL (optional)
+
+# Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+More details and contact info can be found in the [CONTRIBUTING.md](https://github.com/Crazy-Marvin/PartyParrotsTelegramBot/blob/trunk/.github/CONTRIBUTING.md)
+
+# License
+
+[MIT License](https://choosealicense.com/licenses/mit/)
