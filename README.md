@@ -6,7 +6,7 @@
 [![Latest tag](https://img.shields.io/github/tag/Crazy-Marvin/PartyParrotsTelegramBot.svg?style=flat)](https://github.com/Crazy-Marvin/PartyParrotsTelegramBot/tags)
 [![Issues](https://img.shields.io/github/issues/Crazy-Marvin/PartyParrotsTelegramBot.svg?style=flat)](https://github.com/Crazy-Marvin/PartyParrotsTelegramBot/issues)
 [![Pull requests](https://img.shields.io/github/issues-pr/Crazy-Marvin/PartyParrotsTelegramBot.svg?style=flat)](https://github.com/Crazy-Marvin/PartyParrotsTelegramBot/pulls)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/7ae5f852725f409087975f2412adbe0b)](https://www.codacy.com/gh/Crazy-Marvin/PartyParrotsTelegramBot?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Crazy-Marvin/PartyParrotsTelegramBotamp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/8ee8f163e0774f5684fa8d436d6c6c74)](https://www.codacy.com/gh/Crazy-Marvin/PartyParrotsTelegramBot/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Crazy-Marvin/PartyParrotsTelegramBot&amp;utm_campaign=Badge_Grade)
 ![No Dependencies](https://img.shields.io/badge/Dependencies-None-brightgreenChat)
 
 # Party Parrots Telegram Bot
