@@ -1,5 +1,5 @@
 [![Telegram Party Parrots Bot](https://img.shields.io/badge/Telegram-Bot-blue?logo=telegram)](https://t.me/PartyParrotsBot/)
-[![GitHub Actions](https://github.com/Crazy-Marvin/PartyParrtosTelegramBot/actions/workflows/ci.yml/badge.svg)](https://github.com/Crazy-Marvin/PartyParrotsTelegramBot/actions/workflows/ci.yml)
+[![GitHub Actions](https://github.com/Crazy-Marvin/PartyParrotsTelegramBot/actions/workflows/ci.yml/badge.svg)](https://github.com/Crazy-Marvin/PartyParrotsTelegramBot/actions/workflows/ci.yml)
 ![healthchecks.io](https://img.shields.io/endpoint?url=https%3A%2F%2Fhealthchecks.io%2Fbadge%2F396c7d03-faf7-4562-9f83-1194d0%2Fn-TwoPva%2FPartyParrots.shields)
 [![License](https://img.shields.io/github/license/Crazy-Marvin/PartyParrotsTelegramBot)](https://github.com/Crazy-Marvin/PartyParrotsTelegramBot/blob/trunk/LICENSE)
 [![Last commit](https://img.shields.io/github/last-commit/Crazy-Marvin/PartyParrotsTelegramBot.svg?style=flat)](https://github.com/Crazy-Marvin/PartyParrotsTelegramBot/commits)
