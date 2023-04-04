@@ -17,7 +17,7 @@ from telebot.types import InlineQueryResultArticle
 
 from oauth2client.service_account import ServiceAccountCredentials
 
-FEEDBACK_URL = "https://forms.gle/P1k1VnoBNS2GtYhy5"
+FEEDBACK_URL = os.getenv("forms_url")
 
 MIN_MATCH_PERCENT = 50
 BASE_URL = "https://cultofthepartyparrot.com/"
