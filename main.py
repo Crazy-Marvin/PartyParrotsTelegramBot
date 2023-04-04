@@ -1,6 +1,10 @@
 import os
+import gspread
 import requests
 from random import shuffle, choice
+
+from dotenv import load_dotenv
+load_dotenv()
 
 from fuzzywuzzy import fuzz
 
@@ -11,13 +15,35 @@ from telebot.types import InlineKeyboardButton
 from telebot.types import InputTextMessageContent
 from telebot.types import InlineQueryResultArticle
 
-API_TOKEN = os.getenv("API_TOKEN")
+from oauth2client.service_account import ServiceAccountCredentials
+
 FEEDBACK_URL = "https://forms.gle/P1k1VnoBNS2GtYhy5"
 
 MIN_MATCH_PERCENT = 50
 BASE_URL = "https://cultofthepartyparrot.com/"
 
+GIF = "CgACAgQAAxkBAAM-ZCxVhZuyyp7xCHUXa3yODIiWh2cAAuwCAAKK2QxTy2T3R_ahpVEvBA"
+STICKER = 'CAACAgIAAxkBAANAZCxVrOtV9-YNwy1MJbdQC-JIw7AAApsBAAK6wJUFlwkHcwsoZlYvBA'
+
+API_TOKEN = os.getenv("API_KEY")
+
+scope = [
+    "https://spreadsheets.google.com/feeds",
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/drive.file",
+    "https://www.googleapis.com/auth/drive",
+]
+
 bot = telebot.TeleBot(API_TOKEN, parse_mode="HTML")
+creds = ServiceAccountCredentials.from_json_keyfile_name("creds.json", scope)
+client = gspread.authorize(creds)
+
+database = client.open("DATABASE").worksheet("PARTY PARROT BOT")
+analytics = client.open("ANALYTICS").worksheet("PARTY PARROT BOT")
+
+def add_logs(cell):
+    analytics.update_acell(cell,
+        str(int(analytics.acell(cell).value) + 1).replace("'", " "))
 
 def match(query, data):
 
@@ -42,17 +68,33 @@ def searchParrot(parrot, limit=10):
 
     return results[:limit]
 
-
 @bot.message_handler(commands=["start"])
 def start(message):
-    bot.send_message(message.chat.id, "<b>Bot started!</b>")
+
+    add_logs("F3")
+    col = database.col_values(1)
+
+    if str(message.chat.id) not in col:
+        database.append_row([message.chat.id])
+        analytics.update_acell('F10', str(len(col) + 1))
+
+    bot.send_message(message.chat.id, "<i>🦜 PARTY OR DIE 🦜\n\
+        \nTag @PartyParrotsBot in any chat (1:1 or group) to start a party and search for the right parrot(s)! 🥳</i>")
+    bot.send_animation(message.chat.id, GIF)
 
 @bot.message_handler(commands=["help"])
 def help(message):
-    bot.send_message(message.chat.id, "<b>Help message :)</b>")
+    add_logs("F7")
+    bot.send_message(message.chat.id, '''
+        Thanks for using the Party Parrots Telegram bot.\n\
+        \nAfter starting the bot with /start you will be able to tag @PartyParrotsBot in any 1:1 or group chat and search for the right parrot(s).\n\
+        \nIf you would like to contact me send /contact.\n\
+        \nFeedback is very appreaciated by filling out a Google form which the bot will send you after sending him /feedback.\n\
+        \nThe source is available on https://github.com/Crazy-Marvin/PartyParrotsTelegramBot/.\n\nHave fun! 🥳''')
 
 @bot.message_handler(commands=["contact"])
 def contact(message):
+    add_logs("F6")
     contact_info = '''
         <b>CONTACT :\n\
         \n➤ Telegram: https://t.me/Marvin_Marvin\n\
@@ -65,12 +107,13 @@ def contact(message):
 
 @bot.message_handler(commands=["feedback"])
 def feedback(message):
-
+    add_logs("F5")
     bot.send_message(message.chat.id, FEEDBACK_URL)
+    bot.send_sticker(message.chat.id, STICKER)
 
 @bot.message_handler(commands=["parrot"])
 def parrot(message):
-
+    add_logs("F4")
     response, results = requests.get(BASE_URL + "parrots.json").json(), []
 
     for _ in response:  results.append(_)
@@ -85,6 +128,12 @@ def parrot(message):
     if tip: tip = f'<code>{tip}</code>'    
 
     bot.send_animation(message.chat.id, link, caption=tip)
+
+@bot.message_handler(commands=["logs"])
+def logs(message):
+
+    if message.chat.id in [os.getenv("my_id") or os.getenv('analyst_id')]:
+        bot.send_document(message.chat.id, os.getenv('spreadsheet_url'))
 
 @bot.inline_handler(func=lambda query: True)
 def inline_qr(query):
@@ -104,7 +153,6 @@ def inline_qr(query):
                 name, link, link, title=name, caption=tip, parse_mode="HTML"))
 
         if results == []:
-            print("Error!")
             results.append(InlineQueryResultArticle("parrot", "No parrots found! :(",
                 InputTextMessageContent("<b>Cult of the Party Parrot! 🦜\nPARTY OR DIE! 😎</b>", 
                 parse_mode="HTML"), reply_markup=InlineKeyboardMarkup().row(
